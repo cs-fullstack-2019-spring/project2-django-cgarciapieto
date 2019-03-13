@@ -3,13 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {% load static %}
+    <!--<link rel="stylesheet" href="{% static 'GameCollectionApp/index.css' %}">-->
 </head>
 <body>
-<h1>Index page</h1>
-{% for eachPost in allEntries %}
-{% csrf_token %}
-<h3>{{ eachPost.title }}</h3>
-<p>{{ eachPost.textField }}</p>
-{% endfor%}
+
+
+
+<h1>Welcome to You Wiki Page</h1>
+{{ user.username }}
+
+{% if user.is_authenticated %}
+<p><a href="{% url 'addPost' %}">Add a Post</a></p>
+<p><a href="{% url 'addItem' %}">Add a Item</a></p>
+
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+
+{# If they do have entries #}
+{% if allEntries %}
+<ul>
+    {% for eachEntry in allEntries %}
+    <li>{{ eachEntry.title }} </li>
+    <p>{{ eachEntry.textField }} </p>
+    <p><a href="{% url 'viewPost'  eachEntry.pk %}">{{ eachEntry.title }}</a></p>
+    {% endfor %}
+</ul>
+
+
+
+
+{% else %}
+<h2>Add some post</h2>
+{% endif %}
+
+{# This is for users not logged in #}
+{% else %}
+<p><a href="{% url 'newUser' %}">Create a user</a> or</p>
+<p><a href="{% url 'login' %}">Log in</a></p>
+{% endif %}
+
 </body>
-</html>
+

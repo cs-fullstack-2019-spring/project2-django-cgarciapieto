@@ -5,8 +5,22 @@
     <title>Title</title>
 </head>
 <body>
-<h1>View Post</h1>
 
 
+
+{% block content %}
+
+{% if post_list %}
+
+{% for eachpost in post_list %}
+<h2>{{ eachpost.title }}</h2>
+<p>{{ eachpost.textField }}</p>
+
+{% endfor %}
+
+{% else %}
+<p>No posts Available.</p>
+{% endif %}
+{% endblock content %}
 </body>
 </html>

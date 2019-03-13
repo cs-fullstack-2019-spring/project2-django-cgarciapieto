@@ -11,7 +11,9 @@ class UserForm(forms.ModelForm):
 class Wikiform(forms.ModelForm):
     class Meta:
         model = WikiModel
+
         fields = '__all__'
+
 
 class ItemForm(forms.ModelForm):
     class Meta:

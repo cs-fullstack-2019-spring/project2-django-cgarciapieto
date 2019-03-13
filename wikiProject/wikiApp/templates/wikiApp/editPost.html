@@ -8,5 +8,10 @@
 <h1>add post</h1>
 
 
+<form action="{% url 'editPost' post_id %}" method="POST">
+    {% csrf_token %}
+    {{ Postform.as_p }}
+    <button>Submit</button>
+</form>
 </body>
 </html>
