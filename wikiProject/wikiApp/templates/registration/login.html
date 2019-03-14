@@ -1,11 +1,16 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'wikiApp/index.css' %}">
 </head>
 <body>
-
+<div class = item-7>
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
@@ -32,6 +37,8 @@
 </form>
 
 <a href="{% url 'index' %}">Go back home</a>
+
+</div>
 
 </body>
 </html>

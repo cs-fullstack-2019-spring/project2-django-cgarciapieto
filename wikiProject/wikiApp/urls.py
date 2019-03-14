@@ -1,6 +1,7 @@
 from django.urls import path, include
-
+from django.conf import settings
 from . import views
+from django.views.static import serve
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -14,6 +15,7 @@ urlpatterns = [
     path('listPost/<int:post_id>/', views.listPost, name='listItem'),
     path('newUser/', views.newUser, name='newUser'),
     path('postDetails/', views.postDetails, name='postDetails'),
+    path('media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT}),
 
 ]
 

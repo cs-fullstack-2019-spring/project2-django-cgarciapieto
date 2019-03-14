@@ -5,7 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-<h1>List POST</h1>
+{% for eachPost in allpost_list %}
+
+{{eachPost.title}}
+{{eachPost.textField}}
+
+{% endfor %}
 
 </body>
 </html>

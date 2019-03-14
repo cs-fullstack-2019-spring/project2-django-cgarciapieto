@@ -4,43 +4,81 @@
     <meta charset="UTF-8">
     <title>Title</title>
     {% load static %}
-    <!--<link rel="stylesheet" href="{% static 'GameCollectionApp/index.css' %}">-->
+    <link rel="stylesheet" href="{% static 'wikiApp/index.css' %}">
 </head>
 <body>
 
+<div class="item-1"> <nav>
+    <div id =navBar1 >
+        <ul>
+            <li id = "redHover"><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'index' %}">My Entries</a></li>
+            <li><a href="{% url 'addPost' %}">New Entry</a></li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+
+        </ul>
+    </div>
+</nav>
+</div>
+<div class="item-2">
+{% block header %}
+<!--main content-->
+ <header>
+    <h1>Welcome to Your Wiki Page</h1>
+    <h2>{{ user.username }}</h2>
+</header>
+{% endblock header %}
+</div>
+
+<div class="item-3">
+{% block content %}
+<!--MAIN CONTENT-->
+ {% if user.is_authenticated %}
+
+    <!--<p><a href="{% url 'addPost' %}">Add a Post</a></p>-->
+    <!--<p><a href="{% url 'addItem' %}">Add a Item</a></p>-->
+
+    <!--<p><a href="{% url 'logout' %}">Log Out</a></p>-->
+</div>
 
 
-<h1>Welcome to You Wiki Page</h1>
-{{ user.username }}
-
-{% if user.is_authenticated %}
-<p><a href="{% url 'addPost' %}">Add a Post</a></p>
-<p><a href="{% url 'addItem' %}">Add a Item</a></p>
-
-<p><a href="{% url 'logout' %}">Log Out</a></p>
-
-{# If they do have entries #}
-{% if allEntries %}
-<ul>
-    {% for eachEntry in allEntries %}
-    <li>{{ eachEntry.title }} </li>
-    <p>{{ eachEntry.textField }} </p>
-    <p><a href="{% url 'viewPost'  eachEntry.pk %}">{{ eachEntry.title }}</a></p>
-    {% endfor %}
-</ul>
+<div class = 'item-4'>
+    {% if allEntries %}
+    <ul>
+        {% for eachEntry in allEntries %}
+        <h3><a href="{% url 'viewPost'  eachEntry.pk %}">{{ eachEntry.title }}</a></h3>
+        {% if eachEntry.imageUpload %}
+            <img src = "{{ eachEntry.imageUpload.url }}"/>
+        {% endif %}
+        <p>{{ eachEntry.textField }} </p>
+        <li>{{ eachEntry.dateCreated }}</li>
+        {% endfor %}
+    </ul>
+</div>
 
 
 
+    {% else %}
+    <h2>Add some post</h2>
+    {% endif %}
 
-{% else %}
-<h2>Add some post</h2>
-{% endif %}
 
-{# This is for users not logged in #}
-{% else %}
-<p><a href="{% url 'newUser' %}">Create a user</a> or</p>
-<p><a href="{% url 'login' %}">Log in</a></p>
-{% endif %}
+    {% else %}
+    <p><a href="{% url 'newUser' %}">Create a user</a> or</p>
+    <p><a href="{% url 'login' %}">Log in</a></p>
+    {% endif %}</div>
+<div class="item-5"></div>
+<div class="item-6"><footer>site created by carlos </footer>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
 
 </body>
 

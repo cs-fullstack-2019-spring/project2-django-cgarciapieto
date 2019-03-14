@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import WikiModel, ItemModel, UserModel
 from .forms import Wikiform, ItemForm, UserForm
 from django.contrib.auth.models import User
+from django.views.static import serve
 
 
 # grabs all/list of objects in database and renders on home screen
@@ -46,9 +47,9 @@ def newUser(request):
     return render(request, 'wikiApp/newUser.html', context)
 
 
-
 def addPost(request):
     form = Wikiform(request.POST or None)
+    tempUser = UserModel.objects.get(username=request.user)
     context = {'Postform': form}
 
     if request.method == 'POST':
@@ -56,15 +57,26 @@ def addPost(request):
 
         if form.is_valid():
             print("WORKED")
+            print(form)
+            # form.save()
+            theImage = ''
+            if request.FILES:
+                theImage = request.FILES["imageUpload"]
 
-            WikiModel.objects.create(title=request.POST["title"],
-                                     textField=request.POST["textField"],
-                                     dateCreated=request.POST['dateCreated'],
-                                     imageUpload=request.POST['imageUpload'])
-            form.save()
+            WikiModel.objects.create(title=request.POST["title"], textField=request.POST["textField"],
+                                     dateCreated=request.POST["dateCreated"], imageUpload= theImage,
+                                     foreignkeyToUserModel=tempUser)
+
+            #         title = models.CharField(max_length=100)
+            # textField = models.TextField(max_length=1000)
+            # dateCreated = models.DateField(default=timezone.now)
+            # imageUpload = models.ImageField(upload_to="media", null = True, blank=True)
+            # foreignkeyToUserModel
+
             return redirect('index')
 
         else:
+            print(form.errors)
             context = {
                 'errors': form.errors,
                 'Postform': form
@@ -128,37 +140,29 @@ def editItem(request, item_id):
 
 
 def listPost(request):
+    allpost_list = WikiModel.objects.all()
+    context = {
 
-    # # This will put all the user's information from the HTML page into this new form variable
-    # form = Wikiform(request.POST)
-    # # This puts the logged in user entry into the variable collector
-    # userPost = UserModel.objects.get(username=request.user)
-    #
-    #
-    # if form.is_valid():
-    #
-    #     WikiModel.objects.create(title=request.POST["title"],
-    #                              textField=request.POST["textField"],
-    #                              dateCreated=request.POST['dateCreated'],
-    #                              imageUpload=request.POST['imageUpload'])
-    #     form.save()
-    #     return redirect('index')
-    # else:
-    #     context = {"form":form, "errors":form.errors}
+        'post_list': allpost_list
 
-        return render(request, 'wikiApp/listPost.html',)
+    }
 
+    return render(request, 'wikiApp/listPost.html', context)
 
 
 def viewPost(request, post_id):
     post_list = get_object_or_404(WikiModel, pk=post_id)
-
-
+    print(post_id)
     context = {'post_list': post_list}
 
     return render(request, 'wikiApp/viewPost.html', context)
 
 
 # grabs the Users post by ID and displays user entries
-def postDetails(request, post_id):
-    return render(request, 'wikiApp/postDetails.html')
+def postDetails(request):
+    relatedItems = ItemModel.objects.all()
+    context = {
+        'relatedItems': relatedItems
+    }
+
+    return render(request, 'wikiApp/postDetails.html', context)

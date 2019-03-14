@@ -5,6 +5,33 @@
     <title>Title</title>
 </head>
 <body>
+{% block header %}
+
+{% endblock %}
+
+
+{% block sidebar %}
+
+{% endblock sidebar %}
+
+
+{%block content%}
+
+{% endblock content%}
+
 
 </body>
-</html>
+
+
+
+
+
+new_entry = Wikiform(request.POST, request.FILES)
+wikiUser = UserModel.objects.get(username=request.user)
+
+
+WikiModel.objects.create(title=request.POST["title"],
+textField=request.POST["textField"],
+dateCreated=request.POST['dateCreated'],
+imageUpload=request.FILES['imageUpload'])
+form.save()
