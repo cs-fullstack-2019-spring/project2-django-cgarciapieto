@@ -128,7 +128,8 @@ def editPost(request, post_id):
     if request.method == "POST":
         form = Wikiform(request.POST, instance=editExistingPost)
         if form.is_valid():
-            form.save()
+
+            editExistingPost.save()
         else:
             print("form is not valid")
 
@@ -143,6 +144,7 @@ def editItem(request, item_id):
 
         form = ItemForm(request.POST, instance=editThisitem)
         if form.is_valid():
+
             form.save()
         else:
             print("form is not valid")
