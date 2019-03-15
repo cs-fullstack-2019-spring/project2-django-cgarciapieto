@@ -1,14 +1,18 @@
 {% extends 'wikiApp/index.html' %}
 
 {% block content %}
+
 {% if post_list %}
-{{ post_list.title }}
-{{ post_list.textField }}
+
+<h3>{{ post_list.title }}</h3>
+
+{{ post_list.textField }} <br>
+{{ post_list.dateCreated }}
+
 {% endif %}
 <p><a href="{% url 'addItem' post_list.pk %}">Add a Item</a></p>
 
 {% endblock %}
-
 
 
 {% block sidebar %}
