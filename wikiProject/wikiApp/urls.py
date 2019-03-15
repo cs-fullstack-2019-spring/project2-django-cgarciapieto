@@ -12,7 +12,7 @@ urlpatterns = [
     path('deleteItem/<int:item_id>/', views.deleteItem, name='deleteItem'),
     path('editPost/<int:post_id>/', views.editPost, name='editPost'),
     path('editItem/<int:item_id>/', views.editItem, name='editItem'),
-    path('listPost/<int:post_id>/', views.listPost, name='listItem'),
+    path('listPost/', views.listPost, name='listPost'),
     path('newUser/', views.newUser, name='newUser'),
     path('postDetails/', views.postDetails, name='postDetails'),
     path('media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT}),

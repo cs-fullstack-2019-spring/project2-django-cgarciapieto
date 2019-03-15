@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'wikiApp/index.html' %}
+
+{% block content %}
 <form method="POST">
     {% csrf_token %}
     {{ Itemform.as_p }}
     <button>Submit</button>
 </form>
-
-</body>
-</html>
+{% endblock content %}

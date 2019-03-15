@@ -1,15 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'wikiApp/index.html' %}
+
+{% block content %}
 {% if post_list %}
 {{ post_list.title }}
 {{ post_list.textField }}
 {% endif %}
 <p><a href="{% url 'addItem' %}">Add a Item</a></p>
 
-</body>
-</html>
+{% endblock %}
+
+
+
+{% block sidebar %}
+
+{% for eachItem in relatedItems %}
+<li>{{eachItem.itemfield}}</li>
+
+
+
+
+{% endfor %}
+
+{% endblock %}
+

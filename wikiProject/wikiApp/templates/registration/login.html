@@ -1,15 +1,9 @@
 
+{% extends 'wikiApp/index.html' %}
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'wikiApp/index.css' %}">
-</head>
-<body>
+
+{% block content %}
 <div class = item-7>
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
@@ -40,5 +34,4 @@
 
 </div>
 
-</body>
-</html>
+{% endblock %}

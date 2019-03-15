@@ -8,74 +8,73 @@
 </head>
 <body>
 
-<div class="item-1"> <nav>
+ <nav>
     <div id =navBar1 >
         <ul>
             <li id = "redHover"><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'index' %}">My Entries</a></li>
+            <li><a href="{% url 'listPost' %}">All Entries</a></li>
             <li><a href="{% url 'addPost' %}">New Entry</a></li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
 
         </ul>
     </div>
 </nav>
-</div>
-<div class="item-2">
-{% block header %}
-<!--main content-->
- <header>
-    <h1>Welcome to Your Wiki Page</h1>
-    <h2>{{ user.username }}</h2>
-</header>
-{% endblock header %}
-</div>
-
-<div class="item-3">
-{% block content %}
-<!--MAIN CONTENT-->
- {% if user.is_authenticated %}
-
-    <!--<p><a href="{% url 'addPost' %}">Add a Post</a></p>-->
-    <!--<p><a href="{% url 'addItem' %}">Add a Item</a></p>-->
-
-    <!--<p><a href="{% url 'logout' %}">Log Out</a></p>-->
-</div>
 
 
-<div class = 'item-4'>
-    {% if allEntries %}
-    <ul>
-        {% for eachEntry in allEntries %}
-        <h3><a href="{% url 'viewPost'  eachEntry.pk %}">{{ eachEntry.title }}</a></h3>
-        {% if eachEntry.imageUpload %}
+
+<div class="wrapper">
+    <div class="box header">{% block header %}
+        <!--main content-->
+        <header>
+            <h1>Welcome to Your Wiki Page</h1>
+            <h2>{{ user.username }}</h2>
+        </header>
+        {% endblock header %}</div>
+    {% block sidebar %}
+    <div class="box sidebar"> SOme Side bar content</div>
+
+    {% endblock sidebar %}
+    <div class="box content">
+        {% block content %}
+        <!--MAIN CONTENT-->
+        {% if user.is_authenticated %}
+
+        <!--<p><a href="{% url 'addPost' %}">Add a Post</a></p>-->
+        <!--<p><a href="{% url 'addItem' %}">Add a Item</a></p>-->
+
+        <!--<p><a href="{% url 'logout' %}">Log Out</a></p>-->
+
+
+
+        {% if allEntries %}
+        <ul>
+            {% for eachEntry in allEntries %}
+
+            <h2><a href="{% url 'viewPost'  eachEntry.pk %}">{{ eachEntry.title }}</a></h2>
+            {% if eachEntry.imageUpload %}
             <img src = "{{ eachEntry.imageUpload.url }}"/>
+            {% endif %}
+            <p>{{ eachEntry.textField }} </p>
+            <p>{{ eachEntry.dateCreated }}</p>
+            {% endfor %}
+        </ul>
+
+
+
+
+        {% else %}
+        <h2>Add some post</h2>
         {% endif %}
-        <p>{{ eachEntry.textField }} </p>
-        <li>{{ eachEntry.dateCreated }}</li>
-        {% endfor %}
-    </ul>
+
+
+        {% else %}
+        <p><a href="{% url 'newUser' %}">Create a user</a> or</p>
+        <p><a href="{% url 'login' %}">Log in</a></p>
+        {% endif %}
+        {% endblock %}
+        </div>
+    <div class="box footer">site created by carlos</div>
 </div>
-
-
-
-    {% else %}
-    <h2>Add some post</h2>
-    {% endif %}
-
-
-    {% else %}
-    <p><a href="{% url 'newUser' %}">Create a user</a> or</p>
-    <p><a href="{% url 'login' %}">Log in</a></p>
-    {% endif %}</div>
-<div class="item-5"></div>
-<div class="item-6"><footer>site created by carlos </footer>
-</div>
-{% endblock %}
-
-
-
-
-
 
 
 

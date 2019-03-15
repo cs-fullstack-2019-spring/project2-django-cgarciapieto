@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% for eachPost in allpost_list %}
+{% extends 'wikiApp/index.html' %}
 
-{{eachPost.title}}
+{% block content %}
+{% for eachPost in post_list %}
+<li>{{eachPost.title}}</li>
 {{eachPost.textField}}
-
 {% endfor %}
 
-</body>
-</html>
+{% endblock content %}
+

@@ -86,14 +86,27 @@ def addPost(request):
 
 
 def addItem(request):
-    form = ItemForm()
-    if form.is_valid():
-        ItemModel.objects.create(itemField=request.POST["itemField"],
-                                 imageUpload2=request.POST["imageUpload2"])
-        form.save()
-    context = {
-        'Itemform': form
-    }
+    form = ItemForm(request.POST or None)
+    tempUserModel = UserModel.objects.get(username=request.user)
+    tempUser = ItemModel.objects.get(foreignkeyToUserModel=tempUserModel)
+    context = {'Itemform': form}
+    if request.method == 'POST':
+        print(request.method)
+
+        if form.is_valid():
+            ItemModel.objects.create(itemField=request.POST["itemField"],
+                                 imageUpload2=request.POST["imageUpload2"],foreignkeyToWiki=tempUser)
+
+            return redirect('index')
+
+        else:
+            print(form.errors)
+            context = {
+            'errors': form.errors,
+            'Itemform': form}
+
+
+
     return render(request, 'wikiApp/addItem.html', context)
 
 
@@ -140,10 +153,10 @@ def editItem(request, item_id):
 
 
 def listPost(request):
-    allpost_list = WikiModel.objects.all()
+    allPost_list = WikiModel.objects.all()
     context = {
 
-        'post_list': allpost_list
+        'post_list': allPost_list
 
     }
 
@@ -159,8 +172,8 @@ def viewPost(request, post_id):
 
 
 # grabs the Users post by ID and displays user entries
-def postDetails(request):
-    relatedItems = ItemModel.objects.all()
+def postDetails(request, item_id):
+    relatedItems = get_object_or_404(ItemModel, item_id)
     context = {
         'relatedItems': relatedItems
     }
