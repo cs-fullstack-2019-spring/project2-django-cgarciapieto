@@ -3,7 +3,7 @@ from .models import WikiModel, ItemModel, UserModel
 from .forms import Wikiform, ItemForm, UserForm
 from django.contrib.auth.models import User
 from django.views.static import serve
-
+from django.db.models import Q
 
 # grabs all/list of objects in database and renders on home screen
 def index(request):
@@ -49,6 +49,7 @@ def newUser(request):
 
 def addPost(request):
     form = Wikiform(request.POST or None)
+
     tempUser = UserModel.objects.get(username=request.user)
     context = {'Postform': form}
 
@@ -85,17 +86,16 @@ def addPost(request):
     return render(request, 'wikiApp/addPost.html', context)
 
 
-def addItem(request):
+def addItem(request, item_id):
     form = ItemForm(request.POST or None)
-    tempUserModel = UserModel.objects.get(username=request.user)
-    tempUser = ItemModel.objects.get(foreignkeyToUserModel=tempUserModel)
+    tempUser = get_object_or_404(WikiModel, pk=item_id)
     context = {'Itemform': form}
     if request.method == 'POST':
         print(request.method)
 
         if form.is_valid():
             ItemModel.objects.create(itemField=request.POST["itemField"],
-                                 imageUpload2=request.POST["imageUpload2"],foreignkeyToWiki=tempUser)
+                                 imageUpload2=request.POST["imageUpload2"],foreignkeyToWiki=tempUser, )
 
             return redirect('index')
 
@@ -153,10 +153,14 @@ def editItem(request, item_id):
 
 
 def listPost(request):
-    allPost_list = WikiModel.objects.all()
+    query = request.GET.get("q", None)
+    qs = WikiModel.objects.all()
+    if query is not None:
+        qs = qs.filter(Q(title__icontains= query))
+
     context = {
 
-        'post_list': allPost_list
+        'post_list': qs
 
     }
 
@@ -164,18 +168,21 @@ def listPost(request):
 
 
 def viewPost(request, post_id):
-    post_list = get_object_or_404(WikiModel, pk=post_id)
+    wikiModel = get_object_or_404(WikiModel, pk=post_id)
+    print(wikiModel)
+    relatedItems = ItemModel.objects.filter(foreignkeyToWiki= wikiModel)
     print(post_id)
-    context = {'post_list': post_list}
+    context = {'post_list': wikiModel,
+               "relatedItems": relatedItems,
+               }
+    print(relatedItems)
 
     return render(request, 'wikiApp/viewPost.html', context)
 
 
 # grabs the Users post by ID and displays user entries
-def postDetails(request, item_id):
-    relatedItems = get_object_or_404(ItemModel, item_id)
-    context = {
-        'relatedItems': relatedItems
-    }
+def postDetails(request,):
 
-    return render(request, 'wikiApp/postDetails.html', context)
+
+
+    return render(request, 'wikiApp/postDetails.html')

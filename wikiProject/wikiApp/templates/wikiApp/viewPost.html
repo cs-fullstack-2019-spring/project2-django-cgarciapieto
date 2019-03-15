@@ -5,7 +5,7 @@
 {{ post_list.title }}
 {{ post_list.textField }}
 {% endif %}
-<p><a href="{% url 'addItem' %}">Add a Item</a></p>
+<p><a href="{% url 'addItem' post_list.pk %}">Add a Item</a></p>
 
 {% endblock %}
 
@@ -14,12 +14,8 @@
 {% block sidebar %}
 
 {% for eachItem in relatedItems %}
-<li>{{eachItem.itemfield}}</li>
-
-
-
-
+<li>{{ eachItem.itemField }}</li>
 {% endfor %}
 
-{% endblock %}
+{% endblock sidebar %}
 

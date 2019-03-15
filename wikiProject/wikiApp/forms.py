@@ -12,10 +12,12 @@ class Wikiform(forms.ModelForm):
     class Meta:
         model = WikiModel
 
-        fields = '__all__'
+        exclude = ['foreignkeyToUserModel']
+
 
 
 class ItemForm(forms.ModelForm):
     class Meta:
         model = ItemModel
-        fields = '__all__'
+        exclude = ['foreignkeyToWiki']
+
