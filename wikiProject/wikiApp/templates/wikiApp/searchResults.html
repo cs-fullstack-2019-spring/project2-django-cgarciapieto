@@ -1,0 +1,11 @@
+<ul>
+    {% for eachEntry in allEntries %}
+
+    <h2><a href="{% url 'viewPost'  eachEntry.pk %}">{{ eachEntry.title }}</a></h2>
+    {% if eachEntry.imageUpload %}
+    <img src="{{ eachEntry.imageUpload.url }}"/>
+    {% endif %}
+    <p>{{ eachEntry.textField }} </p>
+    <p>{{ eachEntry.dateCreated }}</p>
+    {% endfor %}
+</ul>

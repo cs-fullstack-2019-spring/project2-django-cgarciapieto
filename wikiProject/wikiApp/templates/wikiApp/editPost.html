@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>add post</h1>
+{% extends 'wikiApp/index.html' %}
 
+{% block content%}
 
-<form action="{% url 'editPost' post_id %}" method="POST">
+<h1>Edit Post</h1>
+<form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     {{ Postform.as_p }}
     <button>Submit</button>
 </form>
-</body>
-</html>
+
+
+
+
+{% endblock %}
+
+
+

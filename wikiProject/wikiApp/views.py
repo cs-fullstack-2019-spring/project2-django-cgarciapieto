@@ -124,18 +124,26 @@ def deleteItem(request, item_id):
 
 
 def editPost(request, post_id):
+    # Grab an exact entry of the GameModel using the primary key
     editExistingPost = get_object_or_404(WikiModel, pk=post_id)
+
+    # Post method
     if request.method == "POST":
+        # This will fill in the form with the user's information and use the exact GameModel with primary key
         form = Wikiform(request.POST, instance=editExistingPost)
         if form.is_valid():
-
-            editExistingPost.save()
+            form.save()
         else:
-            print("form is not valid")
+            print("Form is not valid")
+        return redirect("index")
+    form = Wikiform(instance=editExistingPost)
+    context = {
+        "Postform": form,
+        "post_id": post_id
+    }
+    return render(request, "wikiApp/editPost.html", context)
 
-        return redirect('index')
 
-    return render(request, 'wikiApp/editPost.html')
 
 
 def editItem(request, item_id):
@@ -188,3 +196,15 @@ def postDetails(request,):
 
 
     return render(request, 'wikiApp/postDetails.html')
+
+
+def searchBar(request):
+    wikiModelResults = WikiModel.objects.all()
+    search_term = ""
+    if 'search' in request.GET:
+        search_term = request.GET['search']
+        wikiModelResults = WikiModel.filter(title__icontains=search_term)
+
+        context={'myList': wikiModelResults, 'search_term': search_term}
+
+    return render(request, 'wikiApp/searchResults.html', context)

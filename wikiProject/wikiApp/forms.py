@@ -7,6 +7,13 @@ class UserForm(forms.ModelForm):
         model = UserModel
         fields = ['username', 'password1', 'password2']
 
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get("password1")
+        password2 = cleaned_data.get("password2")
+        if password1 != password2:
+            raise forms.ValidationError("Passwords Must Match!")
+
 
 class Wikiform(forms.ModelForm):
     class Meta:

@@ -1,5 +1,7 @@
 body {
     margin: 50px;
+    font-family: sans-serif;
+    text-align: justify;
 }
 
 .sidebar {
@@ -76,4 +78,8 @@ nav a {
 nav a:hover {
     color: #00dbe2;
 
+}
+img{
+    width: 200px;
+    height: 150px;
 }

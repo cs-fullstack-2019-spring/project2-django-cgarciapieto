@@ -5,6 +5,7 @@ from django.views.static import serve
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('searchResults', views.searchBar, name='search'),
     path('viewPost/<int:post_id>/', views.viewPost, name='viewPost'),
     path('addPost/', views.addPost, name='addPost'),
     path('addItem/<int:item_id>/', views.addItem, name='addItem'),

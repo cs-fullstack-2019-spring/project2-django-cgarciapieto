@@ -25,7 +25,7 @@
     <div class="box header">{% block header %}
         <!--main content-->
         <header>
-            <h1>Welcome to Your Wiki Page</h1>
+            <h1>Wikipedia-lite version 1.0</h1>
             <h2>{{ user.username }}</h2>
         </header>
         {% endblock header %}
@@ -35,8 +35,8 @@
     {% block sidebar %}
 
 
-        <form method='GET' action="">
-            <input type="text" name='q' placeholder="Search posts" value='{{ request.user}}'/>
+        <form method='GET' action="{% url 'listPost' %}">
+            <input type="text" name='q' placeholder="Search posts" value=''/>
             <input type='submit' value='Search'/>
         </form>
 
@@ -61,6 +61,7 @@
             {% endif %}
             <p>{{ eachEntry.textField }} </p>
             <p>{{ eachEntry.dateCreated }}</p>
+            <a href="{% url 'editPost' eachEntry.pk %}">Edit</a> or <a href="{% url 'deletePost' eachEntry.pk %}">Delete</a></li>
             {% endfor %}
         </ul>
 
