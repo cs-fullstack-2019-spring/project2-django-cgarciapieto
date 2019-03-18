@@ -11,7 +11,8 @@
 
 {% endif %}
 <p><a href="{% url 'addItem' post_list.pk %}">Add a Item</a></p>
-<p><a href="{% url 'editPost' post_list.pk %}">Add a Item</a></p>
+<p><a href="{% url 'editPost' post_list.pk %}">Edit Post</a></p>
+
 
 {% endblock %}
 
@@ -20,6 +21,7 @@
 
 {% for eachItem in relatedItems %}
 <li>{{ eachItem.itemField }}</li>
+<img src="{{ eachItem.imageUpload.url }}"/>
 {% endfor %}
 
 {% endblock sidebar %}

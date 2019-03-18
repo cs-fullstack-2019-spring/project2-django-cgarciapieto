@@ -18,6 +18,7 @@ class UserForm(forms.ModelForm):
 class Wikiform(forms.ModelForm):
     class Meta:
         model = WikiModel
+        labels = {'title': 'Title', 'textField': '', 'dateCreated': 'Date', 'imageUpload': 'Upload an Image'}
 
         exclude = ['foreignkeyToUserModel']
 
@@ -27,4 +28,5 @@ class ItemForm(forms.ModelForm):
     class Meta:
         model = ItemModel
         exclude = ['foreignkeyToWiki']
+
 

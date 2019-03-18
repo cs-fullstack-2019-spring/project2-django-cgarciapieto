@@ -1,7 +1,7 @@
 {% extends 'wikiApp/index.html' %}
 
 {% block content %}
-<form method="POST">
+<form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     {{ Itemform.as_p }}
     <button>Submit</button>

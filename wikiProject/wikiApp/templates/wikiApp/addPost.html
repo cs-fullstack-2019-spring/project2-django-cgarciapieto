@@ -2,7 +2,8 @@
 
 {% block content%}
 
-<h1>add Post</h1>
+<h1>Add Post</h1>
+<h4>Add some posts to your personal wiki page.</h4>
 <form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     {{ Postform.as_p }}
