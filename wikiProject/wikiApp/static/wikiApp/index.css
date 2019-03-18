@@ -3,7 +3,7 @@ body {
     font-family: sans-serif;
     text-align: justify;
 }
-
+/*postions for the classes listes*/
 .sidebar {
     grid-area: sidebar;
 }
@@ -21,6 +21,8 @@ body {
     grid-area: footer;
 }
 
+/*3 column grid with a header, body, sidebar and footer
+the main content area takes of 66% and the sidebar is no bigger than 33% of the screen*/
 
 .wrapper {
     display: grid;

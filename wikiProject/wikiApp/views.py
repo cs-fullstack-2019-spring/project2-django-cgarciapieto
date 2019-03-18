@@ -1,8 +1,12 @@
+# a list of imports, they include All my model and forms
+
+
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import WikiModel, ItemModel, UserModel
 from .forms import Wikiform, ItemForm, UserForm
 from django.contrib.auth.models import User
-from django.views.static import serve
+
 from django.db.models import Q
 
 # grabs all/list of objects in database and renders on home screen
@@ -12,7 +16,7 @@ def index(request):
 
         wikiUser = UserModel.objects.get(username=request.user)
         print(wikiUser)
-
+        # filters through the users entries
         allEntries = WikiModel.objects.filter(foreignkeyToUserModel=wikiUser)
     else:
 
@@ -23,7 +27,7 @@ def index(request):
     return render(request, 'wikiApp/index.html', context)
 
 
-# imports newUser ModelForm and POST to the database if all fields are valid.
+# imports a form and allos user to create/save a profile in the database
 def newUser(request):
     form = UserForm(request.POST or None)
     context = {'Userform': form}
@@ -45,7 +49,7 @@ def newUser(request):
             }
 
     return render(request, 'wikiApp/newUser.html', context)
-
+# gets a form that allows user to input data into the required fields.
 
 def addPost(request):
     form = Wikiform(request.POST or None)
@@ -60,6 +64,8 @@ def addPost(request):
             print("WORKED")
             print(form)
             # form.save()
+
+            # if theres a valid file to upload it creates and saves it the database
             theImage = ''
             if request.FILES:
                 theImage = request.FILES["imageUpload"]
@@ -68,11 +74,7 @@ def addPost(request):
                                      dateCreated=request.POST["dateCreated"], imageUpload= theImage,
                                      foreignkeyToUserModel=tempUser)
 
-            #         title = models.CharField(max_length=100)
-            # textField = models.TextField(max_length=1000)
-            # dateCreated = models.DateField(default=timezone.now)
-            # imageUpload = models.ImageField(upload_to="media", null = True, blank=True)
-            # foreignkeyToUserModel
+
 
             return redirect('index')
 
@@ -84,7 +86,7 @@ def addPost(request):
             }
 
     return render(request, 'wikiApp/addPost.html', context)
-
+# through the viewpost the add item function allows related objects to be attatched to it via foreignkey variable created in the model
 
 def addItem(request, item_id):
     form = ItemForm(request.POST or None)
@@ -160,7 +162,7 @@ def editItem(request, item_id):
         return redirect('index')
 
     return render(request, 'wikiApp/editItem.html')
-
+# grabs all the objects on the data base allows the user to search key words according to title
 
 def listPost(request):
     query = request.GET.get("q", None)
@@ -175,7 +177,7 @@ def listPost(request):
     }
 
     return render(request, 'wikiApp/listPost.html', context)
-
+# this allows one object to be selected and rendered on the scrreen using the foreignkey created in the model
 
 def viewPost(request, post_id):
     wikiModel = get_object_or_404(WikiModel, pk=post_id)
@@ -190,7 +192,7 @@ def viewPost(request, post_id):
     return render(request, 'wikiApp/viewPost.html', context)
 
 
-# grabs the Users post by ID and displays user entries
+
 def postDetails(request,):
 
 
