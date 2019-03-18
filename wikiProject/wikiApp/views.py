@@ -94,11 +94,8 @@ def addItem(request, item_id):
         print(request.method)
 
         if form.is_valid():
-            theImage = ''
-            if request.FILES:
-                theImage = request.FILES["imageUpload"]
-            ItemModel.objects.create(itemField=request.POST["itemField"],
-                                 imageUpload=theImage,foreignkeyToWiki=tempUser, )
+
+            ItemModel.objects.create(itemField=request.POST["itemField"],foreignkeyToWiki=tempUser, )
 
             return redirect('index')
 

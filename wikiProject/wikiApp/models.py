@@ -30,7 +30,7 @@ class WikiModel(models.Model):
 
 class ItemModel(models.Model):
     itemField = models.CharField(max_length=100)
-    imageUpload = models.ImageField(upload_to="media", null=True, blank=True)
+
     foreignkeyToWiki = models.ForeignKey(WikiModel, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
