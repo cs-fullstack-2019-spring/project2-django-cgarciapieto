@@ -27,7 +27,7 @@ the main content area takes of 66% and the sidebar is no bigger than 33% of the 
 .wrapper {
     display: grid;
     grid-gap: 50px;
-    grid-template-columns: 1fr 2fr ;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas:
             "header header header"
             "sidebar content content"

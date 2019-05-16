@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a39c432-50e1-446f-8518-152b33dc055d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9a39c432-50e1-446f-8518-152b33dc055d" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +36,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/wikiProject/wikiApp/static/wikiApp/index.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+            <state relative-caret-position="175">
+              <caret line="84" column="17" lean-forward="true" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -166,7 +164,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="y" value="27" />
     <option name="width" value="1051" />
     <option name="height" value="803" />
@@ -262,15 +260,16 @@
       <workItem from="1552414671780" duration="241000" />
       <workItem from="1552415161354" duration="56236000" />
       <workItem from="1552664127671" duration="33075000" />
-      <workItem from="1552878555239" duration="866000" />
+      <workItem from="1552878555239" duration="1442000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="96582000" />
+    <option name="totallyTimeSpent" value="97158000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1600" height="812" extended-state="6" />
+    <frame x="0" y="25" width="1600" height="812" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21879022" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -515,8 +514,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/wikiProject/wikiApp/static/wikiApp/index.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+        <state relative-caret-position="175">
+          <caret line="84" column="17" lean-forward="true" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
         </state>
       </provider>
     </entry>

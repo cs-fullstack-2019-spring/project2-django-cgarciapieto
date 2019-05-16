@@ -7,19 +7,19 @@
     <link rel="stylesheet" href="{% static 'wikiApp/index.css' %}">
 </head>
 <body>
-
+{% block navbar %}
 <nav>
     <div id=navBar1>
         <ul>
             <li id="redHover"><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'listPost' %}">All Entries</a></li>
-            <li><a href="{% url 'addPost' %}">New Entry</a></li>
+<!--            <li><a href="{% url 'addPost' %}">New Entry</a></li>-->
             <li><a href="{% url 'logout' %}">Log Out</a></li>
 
         </ul>
     </div>
 </nav>
-
+{% endblock navbar %}
 
 <div class="wrapper">
     <div class="box header">{% block header %}
@@ -49,6 +49,17 @@
         {% block content %}
         <!--MAIN CONTENT-->
         {% if user.is_authenticated %}
+
+        {% block navbar2 %}
+        <nav>
+            <div id=navBar12>
+                <ul>
+                                <li><a href="{% url 'addPost' %}">New Entry</a></li>
+
+                </ul>
+            </div>
+        </nav>
+        {% endblock navbar2 %}
 
 
         {% if allEntries %}
